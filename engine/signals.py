@@ -119,20 +119,31 @@ def holdings_eval(H, V):
     return pd.DataFrame(rows)
 
 
+FX_TO_USD = {"USD": 1.0, "EUR": 1.1355}  # ECB reference 2026-09-29. Other currencies are skipped until a rate is added.
+EU = {"spain", "germany", "france", "italy", "netherlands", "belgium", "portugal", "austria", "ireland", "poland",
+      "sweden", "denmark", "finland", "greece", "czech republic", "czechia", "slovakia", "slovenia", "hungary",
+      "romania", "bulgaria", "croatia", "lithuania", "latvia", "estonia", "luxembourg", "malta", "cyprus"}
+
+
 def match_listings(L, V, today):
-    """L: active listings from the Chrome scan. Returns listings at or below max buy, ranked."""
+    """L: active listings from the Chrome scan. Keeps listings >=30% below fair value or within the flip rule."""
     out = []
     for l in L.itertuples():
-        m = V[(V.set == l.set) & (V.number.astype(str) == str(l.number)) & (V.edition == l.edition) & (V.grade == int(l.grade))]
+        ed = "1st" if str(l.edition).lower().startswith("1") else "unl"
+        m = V[(V.set == l.set) & (V.number.astype(str) == str(l.number)) & (V.edition == ed) & (V.grade == int(l.grade))]
         if m.empty:
             continue
         v = m.iloc[0]
-        eu = str(getattr(l, "seller_region", "")).upper() in ("EU", "ES", "DE", "FR", "IT", "NL", "BE", "PT", "AT", "IE")
-        landed = l.price_usd * (1 if eu or getattr(l, "vat_included", False) else 1 + VAT_IMPORT)
-        cap = v.max_buy_eu * (1 + VAT_IMPORT) if not eu else v.max_buy_eu
-        out.append(dict(**l._asdict(), fair_value=v.fair_value, band_low=v.band_low, landed_cost=landed,
-                        discount_to_fv=1 - landed / v.fair_value, meets_flip_rule=landed <= v.max_buy_eu,
-                        buy_30pct_below_fv=landed <= (1 - BUY_DISCOUNT) * v.fair_value,
+        fx = FX_TO_USD.get(str(l.currency).upper())
+        if fx is None:
+            continue
+        usd = float(l.price) * fx
+        eu = str(l.seller_country).strip().lower() in EU
+        landed = usd * (1 if eu else 1 + VAT_IMPORT)
+        out.append(dict(**{k: getattr(l, k) for k in L.columns if hasattr(l, k)}, card_id=v.card_id,
+                        price_usd=usd, landed_cost=landed, eu_seller=eu, fair_value=v.fair_value,
+                        band_low=v.band_low, discount_to_fv=1 - landed / v.fair_value,
+                        meets_flip_rule=landed <= v.max_buy_eu, buy_30pct_below_fv=landed <= (1 - BUY_DISCOUNT) * v.fair_value,
                         decision_grade=v.decision_grade))
     M = pd.DataFrame(out)
     if len(M):

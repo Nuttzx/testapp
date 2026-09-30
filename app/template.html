@@ -1,0 +1,229 @@
+<title>Slab Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: phone-first single column; sticky tab bar; each card-grade is a "slab" row with a value band scale. */
+:root{
+  --bg:#f3f4f6; --surface:#ffffff; --ink:#15181d; --muted:#5d6570; --line:#dfe2e7;
+  --label:#b3121f;        /* grading-label red, used sparingly */
+  --band:#e7e9ee; --band-core:#c9ced7;
+  --good:#1d7a46; --warn:#9a6300; --bad:#b3121f; --info:#2b5c9e;
+  --good-bg:#e4f3ea; --warn-bg:#f8eed8; --bad-bg:#f9e3e4; --info-bg:#e3ebf6;
+  --f-display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1115; --surface:#171a20; --ink:#e8eaee; --muted:#9aa2ad; --line:#2a2f37;
+  --label:#ff5a5f; --band:#232830; --band-core:#39404b;
+  --good:#5cc88c; --warn:#e0b04f; --bad:#ff6b6f; --info:#7fa8e6;
+  --good-bg:#15291e; --warn-bg:#2e2512; --bad-bg:#321719; --info-bg:#172335; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1115; --surface:#171a20; --ink:#e8eaee; --muted:#9aa2ad; --line:#2a2f37;
+  --label:#ff5a5f; --band:#232830; --band-core:#39404b;
+  --good:#5cc88c; --warn:#e0b04f; --bad:#ff6b6f; --info:#7fa8e6;
+  --good-bg:#15291e; --warn-bg:#2e2512; --bad-bg:#321719; --info-bg:#172335; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--f-body);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:880px;margin:0 auto}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:18px 10px}
+h1{font:700 1.9rem/1 var(--f-display);letter-spacing:.01em;margin:0;display:flex;align-items:center;gap:10px}
+h1 .tag{font:600 .7rem/1 var(--f-num);color:#fff;background:var(--label);padding:5px 7px;border-radius:3px;letter-spacing:.06em}
+.meta{color:var(--muted);font:400 .78rem/1.3 var(--f-num)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px;overflow-x:auto}
+nav button{font:600 1rem/1 var(--f-display);letter-spacing:.03em;text-transform:uppercase;background:none;border:0;color:var(--muted);padding:12px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{color:var(--ink);border-color:var(--label)}
+nav button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--info);outline-offset:2px}
+section{padding-block:14px}
+h2{font:700 1.25rem/1.1 var(--f-display);margin:6px 0 4px;text-wrap:balance}
+p.lede{color:var(--muted);margin:0 0 12px;max-width:65ch}
+.list{display:flex;flex-direction:column;gap:10px}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:8px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.name{font:600 1.08rem/1.15 var(--f-display);letter-spacing:.01em;min-width:0}
+.sub{color:var(--muted);font-size:.82rem}
+.grade{font:600 .78rem/1 var(--f-num);border:1.5px solid var(--label);color:var(--label);border-radius:3px;padding:4px 6px;white-space:nowrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:600 .7rem/1 var(--f-num);letter-spacing:.04em;text-transform:uppercase;padding:5px 7px;border-radius:3px;white-space:nowrap}
+.c-good{color:var(--good);background:var(--good-bg)} .c-warn{color:var(--warn);background:var(--warn-bg)}
+.c-bad{color:var(--bad);background:var(--bad-bg)} .c-info{color:var(--info);background:var(--info-bg)}
+.c-mute{color:var(--muted);background:var(--band)}
+.why{font-size:.9rem;max-width:65ch}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:6px 14px}
+.kv div{min-width:0}
+.k{font:600 .66rem/1.2 var(--f-num);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.v{font:600 .98rem/1.25 var(--f-num);font-variant-numeric:tabular-nums}
+.scale{position:relative;height:22px;margin-top:2px}
+.scale .track{position:absolute;inset:9px 0;background:var(--band);border-radius:2px}
+.scale .core{position:absolute;top:7px;height:8px;background:var(--band-core);border-radius:2px}
+.scale .fv{position:absolute;top:3px;width:2px;height:16px;background:var(--ink)}
+.scale .dot{position:absolute;top:6px;width:10px;height:10px;border-radius:50%;margin-left:-5px;border:2px solid var(--surface)}
+.scale .buy{position:absolute;top:4px;width:0;height:14px;border-left:2px dashed var(--good)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:.75rem;margin:4px 0 10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.filters input,.filters select{font:inherit;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:8px 10px;min-width:0}
+.filters input{flex:1 1 180px}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.86rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+th{font:600 .68rem/1.2 var(--f-num);letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+td:first-child,th:first-child{text-align:left}
+td.num{font-family:var(--f-num)}
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--warn);border-radius:4px;padding:10px 12px;font-size:.88rem;max-width:70ch}
+.empty{color:var(--muted);padding:18px;text-align:center;background:var(--surface);border:1px dashed var(--line);border-radius:6px}
+.count{font:400 .8rem var(--f-num);color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.row{transition:border-color .15s}.row:hover{border-color:var(--band-core)}}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Slab Signal <span class="tag">PSA</span></h1>
+  <div class="meta" id="meta"></div>
+</header>
+<nav role="tablist" aria-label="Views">
+  <button role="tab" id="t-signals" aria-selected="true" data-tab="signals">Signals</button>
+  <button role="tab" id="t-hold" aria-selected="false" data-tab="hold">My slabs</button>
+  <button role="tab" id="t-values" aria-selected="false" data-tab="values">Fair values</button>
+  <button role="tab" id="t-model" aria-selected="false" data-tab="model">Model check</button>
+</nav>
+
+<section id="signals">
+  <h2>Opportunities</h2>
+  <p class="lede">Card-grades the model flags today. Verified signals come from segments that passed the backtest. Unverified ones come from thin markets where the model's error is too wide to act on without your own check.</p>
+  <div class="legend" id="legend"></div>
+  <div class="list" id="opps"></div>
+  <h2 style="margin-top:22px">Live listings below max buy</h2>
+  <div class="list" id="listings"></div>
+</section>
+
+<section id="hold" hidden>
+  <h2>My slabs</h2>
+  <p class="lede">Your collection against the model. A slab is a sell candidate when the median of its last 3–5 sales in 60 days is at least 5% above fair value. Add purchase costs to check your flip rule.</p>
+  <div class="list" id="holdings"></div>
+</section>
+
+<section id="values" hidden>
+  <h2>Fair values</h2>
+  <p class="lede">Every card-grade with sales data. The bar shows the value band (10th–90th percentile of past errors), the black tick is fair value, the dot is the last sale and the dashed line is the flip-rule max buy (EU, VAT included).</p>
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search card" aria-label="Search card">
+    <select id="fset" aria-label="Set"><option value="">All sets</option></select>
+    <select id="fed" aria-label="Edition"><option value="">1st + Unlimited</option><option value="1st">1st Edition</option><option value="unl">Unlimited</option></select>
+    <select id="fgr" aria-label="Grade"><option value="">PSA 8–10</option><option>10</option><option>9</option><option>8</option></select>
+  </div>
+  <div class="count" id="vcount"></div>
+  <div class="list" id="vals"></div>
+</section>
+
+<section id="model" hidden>
+  <h2>Does the model work?</h2>
+  <p class="lede" id="btlede"></p>
+  <div class="tablewrap"><table id="bt"></table></div>
+  <h2 style="margin-top:22px">Trend layer</h2>
+  <p class="lede">12-month change of the segment price index, and whether PSA 10 moves predict next month's PSA 9 move. A lead needs a correlation above about 0.51 over 15 months to count.</p>
+  <div class="tablewrap"><table id="ll"></table></div>
+  <h2 style="margin-top:22px">Data</h2>
+  <div class="note" id="datanote"></div>
+</section>
+</div>
+
+<script id="payload" type="application/json">__DATA__</script>
+<script>
+const D = JSON.parse(document.getElementById('payload').textContent);
+const $ = s => document.querySelector(s);
+const usd = v => v==null||isNaN(v) ? '–' : '$'+Math.round(v).toLocaleString('en-US');
+const pct = v => v==null||isNaN(v) ? '–' : (v>=0?'+':'')+Math.round(v*100)+'%';
+const ED = {'1st':'1st Ed','unl':'Unlimited','shadowless':'Shadowless'};
+const LIQ = {liq:['Liquid','c-good'],mid:['Some sales','c-info'],thin:['Thin','c-warn'],new:['No sales yet','c-bad']};
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('#meta').textContent = `Run ${D.meta.run_date} · ${D.meta.sales_used.toLocaleString()} sales · ${D.meta.sets.join(', ')}`;
+
+// tabs
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+function show(t){
+  document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected', b.dataset.tab===t));
+  document.querySelectorAll('section').forEach(s=>s.hidden = s.id!==t);
+  try{localStorage.setItem('tab',t)}catch(e){}
+}
+const h0 = location.hash.slice(1); let saved=null; try{saved=localStorage.getItem('tab')}catch(e){}
+if(['signals','hold','values','model'].includes(h0)) show(h0); else if(saved) show(saved);
+
+function scale(v){
+  const lo=v.band_low, hi=v.band_high; if(!lo||!hi) return '';
+  const pts=[lo,hi,v.fair_value,v.last_sale,v.max_buy_eu].filter(x=>x>0);
+  const min=Math.min(...pts)*0.92, max=Math.max(...pts)*1.05;
+  const x=p=>((Math.log(p)-Math.log(min))/(Math.log(max)-Math.log(min))*100).toFixed(2)+'%';
+  const lastCol = v.last_sale < lo ? 'var(--good)' : v.last_sale > hi ? 'var(--bad)' : 'var(--muted)';
+  return `<div class="scale" aria-hidden="true"><div class="track"></div>
+    <div class="core" style="left:${x(lo)};width:calc(${x(hi)} - ${x(lo)})"></div>
+    ${v.max_buy_eu>0?`<div class="buy" style="left:${x(v.max_buy_eu)}"></div>`:''}
+    <div class="fv" style="left:${x(v.fair_value)}"></div>
+    ${v.last_sale>0?`<div class="dot" style="left:${x(v.last_sale)};background:${lastCol}"></div>`:''}</div>`;
+}
+$('#legend').innerHTML = `<span><i style="background:var(--band-core)"></i>value band</span><span><i style="background:var(--ink);border-radius:0;width:3px"></i>fair value</span><span><i style="background:var(--muted)"></i>last sale</span><span><i style="border:2px dashed var(--good);background:none;border-radius:0;width:0"></i>max buy</span>`;
+
+const TYPE = {'LAGGING GRADE':'c-info','CHEAP RECENT SALE':'c-good','STALE IN A RISING SEGMENT':'c-warn'};
+function card(v, extra=''){
+  const liq=LIQ[v.liquidity]||['',''];
+  return `<article class="row">
+    <div class="top"><div class="name">${esc(v.card)} <span class="sub">#${esc(v.number)} · ${esc(v.set)} · ${ED[v.edition]||v.edition}</span></div>
+    <span class="grade">PSA ${v.grade}</span></div>
+    ${extra}
+    ${scale(v)}
+    <div class="kv">
+      <div><div class="k">Fair value</div><div class="v">${usd(v.fair_value)}</div></div>
+      <div><div class="k">Band</div><div class="v">${usd(v.band_low)}–${usd(v.band_high)}</div></div>
+      <div><div class="k">Last sale</div><div class="v">${usd(v.last_sale)}</div><div class="sub">${v.last_sale_date||'none'}</div></div>
+      <div><div class="k">Max buy EU / US</div><div class="v">${usd(v.max_buy_eu)} / ${usd(v.max_buy_us_vat)}</div></div>
+    </div>
+    <div class="chips"><span class="chip ${v.decision_grade?'c-good':'c-mute'}">${v.decision_grade?'Verified':'Unverified'}</span><span class="chip ${liq[1]}">${liq[0]}</span>${v.sales_12m!=null?`<span class="chip c-mute">${v.sales_12m} sales/12m</span>`:''}</div>
+  </article>`;
+}
+// signals
+const V = D.valuations, byId = Object.fromEntries(V.map(v=>[v.card_id+'|'+v.grade, v]));
+const opps = (D.opportunities||[]).map(o=>({...byId[o.card_id+'|'+o.grade], ...o}));
+opps.sort((a,b)=>(b.decision_grade-a.decision_grade)||(b.strength-a.strength));
+$('#opps').innerHTML = opps.length ? opps.map(o=>card(o,
+  `<div class="chips"><span class="chip ${TYPE[o.type]||'c-mute'}">${esc(o.type)}</span></div><div class="why">${esc(o.why)}</div>`)).join('')
+  : '<div class="empty">No opportunities flagged in this run.</div>';
+$('#listings').innerHTML = D.listings.length ? D.listings.map(l=>card({...byId[l.card_id+'|'+l.grade], ...l},
+  `<div class="why"><b>Listed ${usd(l.price_usd)}</b> (landed ${usd(l.landed_cost)}, ${pct(-l.discount_to_fv)} vs fair value) · <a href="${esc(l.url)}" target="_blank" rel="noopener">open listing</a></div>`)).join('')
+  : '<div class="empty">No listing scan loaded yet. Run the eBay scan prompt in Chrome and upload the CSV; matches at or below max buy appear here.</div>';
+
+// holdings
+const VERD = {'SELL CANDIDATE':'c-bad','HOLD':'c-good','HOLD (Collectr understates)':'c-good','NO DATA YET':'c-mute','NOT MODELLED':'c-mute'};
+$('#holdings').innerHTML = D.holdings.map(h=>{
+  const v = h.fair_value ? {...h, card:h.card_name, number:h.card_number, liquidity:(V.find(x=>x.set===h.set&&String(x.number)===String(h.card_number)&&x.edition===h.edition&&x.grade===h.grade)||{}).liquidity, max_buy_eu:null} : null;
+  const head = `<div class="top"><div class="name">${esc(h.card_name)} <span class="sub">${esc(h.set)} · ${esc(h.grader)} ${h.grade??''} ${h.lang==='JP'?'· Japanese':''}</span></div><span class="chip ${VERD[h.verdict]||'c-mute'}">${esc(h.verdict)}</span></div>`;
+  const body = v ? `${scale(v)}<div class="kv">
+      <div><div class="k">Fair value</div><div class="v">${usd(h.fair_value)}</div></div>
+      <div><div class="k">Band</div><div class="v">${usd(h.band_low)}–${usd(h.band_high)}</div></div>
+      <div><div class="k">Net if sold at FV</div><div class="v">${usd(h.net_if_sold_at_fv)}</div></div>
+      <div><div class="k">Collectr</div><div class="v">${usd(h.collectr_value_usd)}</div></div></div>`
+    : `<div class="kv"><div><div class="k">Collectr</div><div class="v">${usd(h.collectr_value_usd)}</div></div></div>`;
+  return `<article class="row">${head}<div class="why">${esc(h.reason)}</div>${body}</article>`;
+}).join('');
+
+// values
+const sets=[...new Set(V.map(v=>v.set))].sort(); $('#fset').innerHTML += sets.map(s=>`<option>${esc(s)}</option>`).join('');
+function renderVals(){
+  const q=$('#q').value.toLowerCase(), fs=$('#fset').value, fe=$('#fed').value, fg=$('#fgr').value;
+  const rows=V.filter(v=>(!q||v.card.toLowerCase().includes(q))&&(!fs||v.set===fs)&&(!fe||v.edition===fe)&&(!fg||String(v.grade)===fg))
+    .sort((a,b)=>b.fair_value-a.fair_value);
+  $('#vcount').textContent = `${rows.length} card-grades`;
+  $('#vals').innerHTML = rows.slice(0,120).map(v=>card(v)).join('') || '<div class="empty">No card-grade matches these filters.</div>';
+}
+['#q','#fset','#fed','#fgr'].forEach(s=>$(s).addEventListener('input',renderVals)); renderVals();
+
+// model
+const TIER={liq:'liquid',mid:'some sales',thin:'thin',new:'no prior sales'};
+$('#btlede').textContent = `Walk-forward test on ${D.meta.backtest_sales.toLocaleString()} sales: each sale was predicted with only the data available before its month. "Verified" means median error at or under 25% (PSA 8/9) or 35% (PSA 10), and no worse than using the last sale.`;
+$('#bt').innerHTML = `<tr><th>Segment</th><th>Tested</th><th>Model</th><th>Last sale</th><th>Status</th></tr>` +
+  D.report.map(r=>`<tr><td>PSA ${r.grade} · ${TIER[r.tier]}</td><td class="num">${r.n}</td><td class="num">${r.err_model==null?'–':Math.round(r.err_model*100)+'%'}</td><td class="num">${r.err_last_sale==null?'–':Math.round(r.err_last_sale*100)+'%'}</td><td><span class="chip ${r.decision_grade?'c-good':'c-mute'}">${r.decision_grade?'Verified':'Not verified'}</span></td></tr>`).join('');
+$('#ll').innerHTML = `<tr><th>Segment</th><th>PSA 10 12m</th><th>PSA 9 12m</th><th>PSA 8 12m</th><th>10→9 lead</th></tr>` +
+  D.lead_lag.map(r=>`<tr><td>${esc(r.segment)}</td><td class="num">${pct(r.psa10_12m)}</td><td class="num">${pct(r.psa9_12m)}</td><td class="num">${pct(r.psa8_12m)}</td><td class="num">${r.psa10_leads_psa9_corr?.toFixed(2)} ${r.significant?'✓':'(not significant)'}</td></tr>`).join('');
+const ex = Object.entries(D.meta.exclusions).filter(([k])=>k!=='used').map(([k,n])=>`${k.replace('excluded:','').replaceAll('_',' ')} ${n}`).join(', ');
+$('#datanote').innerHTML = `Sales from ${D.meta.date_range[0]} to ${D.meta.date_range[1]} (PriceCharting and PSA auction records), sets: ${D.meta.sets.join(', ')}. ${D.meta.sales_excluded} sales excluded: ${esc(ex)}. Best-offer prices without a confirmed accepted price were tested against nearby sales (${D.meta.best_offer_pairs} pairs) and show no systematic premium, so they are used as-is. Other sets appear after their Chrome capture is uploaded.`;
+</script>
