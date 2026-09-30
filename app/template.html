@@ -120,6 +120,9 @@ td.num{font-family:var(--f-num)}
   <h2>Does the model work?</h2>
   <p class="lede" id="btlede"></p>
   <div class="tablewrap"><table id="bt"></table></div>
+  <h2 style="margin-top:22px">Low-pop layer</h2>
+  <p class="lede">PSA 10 price index for holos with fewer than 100 PSA 10s versus the rest, pooled across the sets with sales data. The model values PSA 10s on these two indices.</p>
+  <div class="tablewrap"><table id="lp"></table></div>
   <h2 style="margin-top:22px">Trend layer</h2>
   <p class="lede">12-month change of the segment price index, and whether PSA 10 moves predict next month's PSA 9 move. A lead needs a correlation above about 0.51 over 15 months to count.</p>
   <div class="tablewrap"><table id="ll"></table></div>
@@ -178,7 +181,7 @@ function card(v, extra=''){
       <div><div class="k">Last sale</div><div class="v">${usd(v.last_sale)}</div><div class="sub">${v.last_sale_date||'none'}</div></div>
       <div><div class="k">Max buy EU / US</div><div class="v">${usd(v.max_buy_eu)} / ${usd(v.max_buy_us_vat)}</div></div>
     </div>
-    <div class="chips"><span class="chip ${v.decision_grade?'c-good':'c-mute'}">${v.decision_grade?'Verified':'Unverified'}</span><span class="chip ${liq[1]}">${liq[0]}</span>${v.sales_12m!=null?`<span class="chip c-mute">${v.sales_12m} sales/12m</span>`:''}</div>
+    <div class="chips"><span class="chip ${v.decision_grade?'c-good':'c-mute'}">${v.decision_grade?'Verified':'Unverified'}</span>${v.pop10!=null?`<span class="chip ${v.low_pop?'c-warn':'c-mute'}">PSA 10 pop ${v.pop10}</span>`:''}<span class="chip ${liq[1]}">${liq[0]}</span>${v.sales_12m!=null?`<span class="chip c-mute">${v.sales_12m} sales/12m</span>`:''}</div>
   </article>`;
 }
 // signals
@@ -224,6 +227,8 @@ $('#bt').innerHTML = `<tr><th>Segment</th><th>Tested</th><th>Model</th><th>Last 
   D.report.map(r=>`<tr><td>PSA ${r.grade} · ${TIER[r.tier]}</td><td class="num">${r.n}</td><td class="num">${r.err_model==null?'–':Math.round(r.err_model*100)+'%'}</td><td class="num">${r.err_last_sale==null?'–':Math.round(r.err_last_sale*100)+'%'}</td><td><span class="chip ${r.decision_grade?'c-good':'c-mute'}">${r.decision_grade?'Verified':'Not verified'}</span></td></tr>`).join('');
 $('#ll').innerHTML = `<tr><th>Segment</th><th>PSA 10 12m</th><th>PSA 9 12m</th><th>PSA 8 12m</th><th>10→9 lead</th></tr>` +
   D.lead_lag.map(r=>`<tr><td>${esc(r.segment)}</td><td class="num">${pct(r.psa10_12m)}</td><td class="num">${pct(r.psa9_12m)}</td><td class="num">${pct(r.psa8_12m)}</td><td class="num">${r.psa10_leads_psa9_corr?.toFixed(2)} ${r.significant?'✓':'(not significant)'}</td></tr>`).join('');
+$('#lp').innerHTML = `<tr><th>Group</th><th>Cards</th><th>Sales 12m</th><th>3m</th><th>6m</th><th>12m</th></tr>` +
+  (D.low_pop||[]).map(r=>`<tr><td>${esc(r.group)}</td><td class="num">${r.cards}</td><td class="num">${r.sales_12m}</td><td class="num">${pct(r.chg_3m)}</td><td class="num">${pct(r.chg_6m)}</td><td class="num">${pct(r.chg_12m)}</td></tr>`).join('');
 const ex = Object.entries(D.meta.exclusions).filter(([k])=>k!=='used').map(([k,n])=>`${k.replace('excluded:','').replaceAll('_',' ')} ${n}`).join(', ');
-$('#datanote').innerHTML = `Sales from ${D.meta.date_range[0]} to ${D.meta.date_range[1]} (PriceCharting and PSA auction records), sets: ${D.meta.sets.join(', ')}. ${D.meta.sales_excluded} sales excluded: ${esc(ex)}. Best-offer prices without a confirmed accepted price were tested against nearby sales (${D.meta.best_offer_pairs} pairs) and show no systematic premium, so they are used as-is. Other sets appear after their Chrome capture is uploaded.`;
+$('#datanote').innerHTML = `Sales from ${D.meta.date_range[0]} to ${D.meta.date_range[1]} (PriceCharting and PSA auction records), sets: ${D.meta.sets.join(', ')}. ${D.meta.sales_excluded} sales excluded: ${esc(ex)}. Best-offer prices without a confirmed accepted price were tested against nearby sales (${D.meta.best_offer_pairs} pairs) and show no systematic premium, so they are used as-is. PSA populations from Pikawiz (30 Sep 2026) for 17 sets. Other sets get fair values after their sales capture is uploaded.`;
 </script>

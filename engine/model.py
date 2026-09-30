@@ -29,6 +29,24 @@ SEG_SHRINK = 10         # sales needed for a segment deviation to count half
 RATIO_SHRINK = 3        # pair samples needed for a card's own ratio to count half
 
 
+POP10 = {}             # (set, number, edition) -> PSA 10 pop, filled by run.py
+POP_SEGMENTS = True    # PSA 10 index segmented by population band instead of by set
+LOW_POP = 100
+
+
+def seg_key(set_, edition, lang, grade, pop10):
+    if POP_SEGMENTS and grade == 10 and pop10 is not None and pop10 == pop10:
+        return f"PSA10 pop<{LOW_POP}" if pop10 < LOW_POP else f"PSA10 pop>={LOW_POP}"
+    return f"{set_} {edition} {lang}"
+
+
+def add_segments(s):
+    s = s.copy()
+    s["seg"] = [seg_key(a, e, l, g, POP10.get((a, n, e))) for a, n, e, l, g in
+                zip(s.set, s.number, s.edition, s.lang, s.grade)]
+    return s
+
+
 def month(d):
     return d.dt.to_period("M")
 
@@ -60,7 +78,7 @@ def fit_index(s, cutoff):
         glob[g] = b
         # segment deviations (shrunk)
         dg = dg.assign(res=dg.lp - node.map(a) - dg.m.map(b))
-        for sg, ds in dg.groupby(["set", "edition", "lang"]):
+        for sg, ds in dg.groupby("seg"):
             r = ds.groupby("m").res.agg(["median", "size"]).reindex(months)
             n = r["size"].fillna(0)
             dev = (r["median"].fillna(0) * n / (n + SEG_SHRINK))
@@ -103,13 +121,13 @@ def node_table(s, cutoff, index):
     tm = pd.Timestamp(cutoff - pd.Timedelta(days=1)).to_period("M")
     rows = []
     for (cid, g), x in d.groupby(["card_id", "grade"]):
-        sg = (x.set.iloc[0], x.edition.iloc[0], x.lang.iloc[0])
+        sg = x.seg.iloc[0]
         age = (cutoff - x.date).dt.days.values
         adj = np.array([adjust(index, sg, g, m, tm) for m in month(x.date)])
         lp = np.log(x.px.values) + adj
         w = 0.5 ** (age / HALF_LIFE_OWN)
         last = x.sort_values("date").iloc[-1]
-        rows.append(dict(card_id=cid, grade=int(g), set=sg[0], edition=sg[1], lang=sg[2],
+        rows.append(dict(card_id=cid, grade=int(g), seg=sg, set=x.set.iloc[0], edition=x.edition.iloc[0], lang=x.lang.iloc[0],
                          number=x.number.iloc[0], card=x.card_name.iloc[0],
                          own=wmedian(lp, w), n_eff=float(w.sum()),
                          last_lp=float(np.log(last.px)),
@@ -247,14 +265,14 @@ def estimates(s, cutoff, lang_map=None, use_index=True):
         add = []
         for cid, g in missing:
             s_, n_, c_, e_, l_ = cid.split("|")
-            add.append(dict(card_id=cid, grade=g, set=s_, edition=e_, lang=l_, number=n_, card=c_,
+            add.append(dict(card_id=cid, grade=g, seg=seg_key(s_, e_, l_, g, POP10.get((s_, n_, e_))), set=s_, edition=e_, lang=l_, number=n_, card=c_,
                             own=np.nan, n_eff=0.0, last_lp=np.nan, last_adj=np.nan, last_date=pd.NaT,
                             last_px=np.nan, last_venue=None, sales_12m=0, sales_all=0))
         nodes = pd.concat([nodes, pd.DataFrame(add).set_index(["card_id", "grade"])])
     nodes["anchor"] = [anc.get(k, np.nan) for k in nodes.index]
     nodes["n_anchor"] = [len(detail.get(k, [])) for k in nodes.index]
-    nodes["mom3"] = [momentum(index, (r.set, r.edition, r.lang), k[1], cutoff, 3) for k, r in nodes.iterrows()]
-    nodes["mom12"] = [momentum(index, (r.set, r.edition, r.lang), k[1], cutoff, 12) for k, r in nodes.iterrows()]
+    nodes["mom3"] = [momentum(index, r.seg, k[1], cutoff, 3) for k, r in nodes.iterrows()]
+    nodes["mom12"] = [momentum(index, r.seg, k[1], cutoff, 12) for k, r in nodes.iterrows()]
     return nodes, ratios, index, detail
 
 
