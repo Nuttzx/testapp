@@ -22,7 +22,7 @@ import numpy as np
 import pandas as pd
 
 HALF_LIFE_OWN = 90
-HALF_LIFE_RATIO = 365
+HALF_LIFE_RATIO = 120
 PAIR_MAX_GAP = 180      # max days between B's two bracketing sales for interpolation
 PAIR_NEAR = 45          # else nearest B sale within this many days
 SEG_SHRINK = 10         # sales needed for a segment deviation to count half
@@ -71,6 +71,8 @@ def fit_index(s, cutoff):
 
 
 def idx_value(index, sg, g, m):
+    if index is None:
+        return 0.0
     ser = index["seg"].get((sg, g))
     if ser is None:
         ser = index["glob"].get(g)
@@ -118,11 +120,12 @@ def node_table(s, cutoff, index):
 
 
 # ---------------------------------------------------------------- 3. anchors
-def edges(nodes, lang_map=None):
-    """Linked node pairs (A, B, kind). A's value is implied from B."""
+def edges(nodes, lang_map=None, targets=None):
+    """Linked node pairs (A, B, kind). A's value is implied from B (B must have sales).
+    targets: nodes to value (default: nodes with sales)."""
     out = []
     keys = set(nodes.index)
-    for cid, g in keys:
+    for cid, g in (targets if targets is not None else keys):
         for g2 in (8, 9, 10):
             if g2 != g and (cid, g2) in keys:
                 out.append(((cid, g), (cid, g2), f"grade{g2}"))
@@ -189,7 +192,9 @@ def pair_ratios(s, cutoff, nodes, lang_map=None):
     # edges with no paired samples still get the pooled ratio
     have = set(zip(R.a, R.b))
     extra = []
-    for a, b, kind in edges(nodes, lang_map):
+    card_ids = {k[0] for k in nodes.index}
+    targets = {(c, g) for c in card_ids for g in (8, 9, 10)}
+    for a, b, kind in edges(nodes, lang_map, targets):
         if (a, b) in have:
             continue
         et = f"{kind}:{a[1]}<-{b[1]}"
@@ -231,11 +236,21 @@ def momentum(index, sg, g, cutoff, months):
 
 
 # ---------------------------------------------------------------- 5. estimates
-def estimates(s, cutoff, lang_map=None):
-    index = fit_index(s, cutoff)
+def estimates(s, cutoff, lang_map=None, use_index=True):
+    index = fit_index(s, cutoff) if use_index else None
     nodes = node_table(s, cutoff, index)
     ratios = pair_ratios(s, cutoff, nodes, lang_map)
     anc, detail = anchor_values(nodes, ratios)
+    # nodes with no sales at all get an anchor-only row
+    missing = [k for k in anc if k not in nodes.index]
+    if missing:
+        add = []
+        for cid, g in missing:
+            s_, n_, c_, e_, l_ = cid.split("|")
+            add.append(dict(card_id=cid, grade=g, set=s_, edition=e_, lang=l_, number=n_, card=c_,
+                            own=np.nan, n_eff=0.0, last_lp=np.nan, last_adj=np.nan, last_date=pd.NaT,
+                            last_px=np.nan, last_venue=None, sales_12m=0, sales_all=0))
+        nodes = pd.concat([nodes, pd.DataFrame(add).set_index(["card_id", "grade"])])
     nodes["anchor"] = [anc.get(k, np.nan) for k in nodes.index]
     nodes["n_anchor"] = [len(detail.get(k, [])) for k in nodes.index]
     nodes["mom3"] = [momentum(index, (r.set, r.edition, r.lang), k[1], cutoff, 3) for k, r in nodes.iterrows()]

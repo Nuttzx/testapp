@@ -1,0 +1,40 @@
+Index,set,card_number,card_name,edition,lang,grader,grade,collectr_value_usd,cost,cost_currency,buy_date,in_scope,note,verdict,reason,fair_value,band_low,band_high,net_if_sold_at_fv,last_sale,last_sale_date,decision_grade
+0,Neo Destiny,4,Dark Espeon,1st,EN,PSA,9.0,3929.23,,,,yes,edition read from 1st Ed stamp in photo - confirm,NO DATA YET,set not captured yet,,,,,,,
+1,Neo Destiny,106,Shining Celebi,1st,EN,PSA,9.0,3148.76,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
+2,e-Card Base Expansion Pack,127/128,Tyranitar,1st,JP,PSA,10.0,3134.21,,,,yes,Japanese e-series; needs JP data,NO DATA YET,set not captured yet,,,,,,,
+3,Neo Revelation,7,Ho-oh,1st,EN,CGC,10.0,2749.0,2200.0,EUR,,no (CGC),outside PSA-only scope; tracked vs PSA 10/9 values,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+4,Team Rocket,4,Dark Charizard,1st,EN,PSA,9.0,2703.63,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (2,947) is +7% vs fair value; cost unknown, flip rule not checked",2751.13326701307,2210.2719520781375,3754.5530240743537,2420.9972749715016,2900.0,2026-09-25,True
+5,Team Rocket,3,Dark Blastoise,1st,EN,PSA,9.0,1410.59,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",1445.0903397426814,1160.991611874954,1972.1575723709711,1271.6794989735597,1425.0,2026-09-28,True
+6,Neo Revelation (JP),229,Houndoom,unl,JP,CGC,10.0,999.99,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+7,Team Rocket,83,Dark Raichu,1st,EN,PSA,9.0,983.86,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",912.6240993234194,733.2060113958636,1245.4851289985131,803.109207404609,920.0,2026-09-15,True
+8,Gym Challenge,29,Sabrina's Gengar,1st,EN,BGS,9.0,933.1,,,,no (BGS),non-holo,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+9,Pokemon VS (JP),43/141,Pryce's Sneasel,1st,JP,PSA,10.0,857.89,,,,yes,Japanese VS 2001; needs JP data,NO DATA YET,set not captured yet,,,,,,,
+10,Neo Discovery,13,Umbreon,1st,EN,PSA,7.0,799.06,,,,yes,PSA 7 not modelled (model covers 8-10),NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+11,Pokemon VS (JP),90/141,Karen's Tyranitar,1st,JP,CGC,10.0,749.99,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+12,Gym Challenge,8,Giovanni's Persian,1st,EN,PSA,9.0,720.13,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
+13,Team Rocket,8,Dark Gyarados,1st,EN,PSA,9.0,585.18,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",540.4195683372648,434.1753373317615,737.5265854614789,475.569220136793,561.0,2026-09-21,True
+14,Team Rocket,11,Dark Magneton,1st,EN,PSA,9.0,511.03,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",493.7872688926896,396.7107532786747,673.8861057368234,434.53279662556685,425.0,2026-09-21,True
+15,Fossil,3,Ditto,1st,EN,PSA,9.0,482.11,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
+16,Team Rocket,12,Dark Slowbro,1st,EN,PSA,9.0,432.62,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",383.2515117698715,307.90586454438994,523.0346852876762,337.26133035748694,500.0,2026-09-28,True
+17,Fossil,6,Haunter,1st,EN,PSA,9.0,424.97,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
+18,Team Rocket,1,Dark Alakazam,1st,EN,PSA,9.0,411.72,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",460.5323170719259,369.9935861539628,628.5020883861648,405.2684390232948,405.0,2026-09-21,True
+19,Team Rocket,10,Dark Machamp,1st,EN,PSA,9.0,357.06,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (385) is +5% vs fair value; cost unknown, flip rule not checked",365.3311520384215,293.5085727226898,498.57823978248786,321.4914137938109,275.0,2026-09-21,True
+20,Team Rocket,6,Dark Dugtrio,1st,EN,PSA,9.0,328.73,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (325) is +12% vs fair value; cost unknown, flip rule not checked",290.93745569254435,233.74036650153707,397.05095975699606,256.02496100943904,285.0,2026-09-28,True
+21,Neo Genesis,10,Meganium,1st,EN,CGC,9.0,291.29,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+22,Gym Heroes,5,Erika's Vileplume,1st,EN,PSA,9.0,274.65,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
+23,Team Rocket,9,Dark Hypno,1st,EN,PSA,9.0,250.92,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",261.45811357000974,210.05653997069976,356.81962874842856,230.08313994160858,243.5,2026-09-25,True
+24,Team Rocket,13,Dark Vileplume,1st,EN,PSA,9.0,247.44,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",211.45261201142603,169.88191125686217,288.57564022620943,186.0782985700549,305.0,2026-09-28,True
+25,Team Rocket,2,Dark Arbok,1st,EN,PSA,9.0,242.43,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (210) is +9% vs fair value; cost unknown, flip rule not checked",192.66826630266598,154.7904894940449,262.9400874771946,169.54807434634606,210.0,2026-09-26,True
+26,Neo Genesis (JP),249,Lugia,unl,JP,RAW,,213.37,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+27,Team Rocket,7,Dark Golbat,1st,EN,PSA,9.0,209.07,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",208.57854682933183,167.5728752909949,284.65331837789915,183.549121209812,232.5,2026-09-25,True
+28,Team Rocket,14,Dark Weezing,1st,EN,PSA,9.0,202.58,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",175.7810602356918,141.22323763956763,239.89361736716506,154.6873330074088,179.99,2026-09-24,True
+29,Neo Genesis,17,Typhlosion,unl,EN,RAW,,201.63,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+30,Neo Destiny,10,Dark Typhlosion,unl,EN,RAW,,184.46,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+31,WotC Black Star Promos,17,Dark Persian,unl,EN,PSA,7.0,158.88,,,,yes,PSA 7 not modelled,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+32,Neo Genesis,5,Feraligatr,unl,EN,RAW,,150.13,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+33,Misc (JP),,Tohoku Box,,JP,SEALED,,155.0,,,,no (modern sealed),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+34,Misc (JP),,Hiroshima Box,,JP,SEALED,,153.35,,,,no (modern sealed),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+35,Misc (JP),,Fukuoka Box,,JP,SEALED,,149.43,,,,no (modern sealed),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+36,Celebrations Classic Collection,2/102,Blastoise,,EN,PSA,10.0,121.63,,,,no (modern),,NO DATA YET,set not captured yet,,,,,,,
+37,EX Dragon Frontiers,12/101,Typhlosion delta,rev,EN,RAW,,94.99,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
+38,Pokemon 151 (JP),176/165,Poliwhirl,,JP,PSA,10.0,77.98,,,,no (modern),,NO DATA YET,set not captured yet,,,,,,,
