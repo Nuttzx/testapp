@@ -1,0 +1,40 @@
+set,card_number,card_name,edition,lang,grader,grade,collectr_value_usd,cost,cost_currency,buy_date,in_scope,note
+Neo Destiny,4,Dark Espeon,1st,EN,PSA,9,3929.23,,,,yes,edition read from 1st Ed stamp in photo - confirm
+Neo Destiny,106,Shining Celebi,1st,EN,PSA,9,3148.76,,,,yes,
+e-Card Base Expansion Pack,127/128,Tyranitar,1st,JP,PSA,10,3134.21,,,,yes,Japanese e-series; needs JP data
+Neo Revelation,7,Ho-oh,1st,EN,CGC,10,2749.00,2200,EUR,,no (CGC),outside PSA-only scope; tracked vs PSA 10/9 values
+Team Rocket,4,Dark Charizard,1st,EN,PSA,9,2703.63,,,,yes,
+Team Rocket,3,Dark Blastoise,1st,EN,PSA,9,1410.59,,,,yes,
+Neo Revelation (JP),229,Houndoom,unl,JP,CGC,10,999.99,,,,no (CGC),
+Team Rocket,83,Dark Raichu,1st,EN,PSA,9,983.86,,,,yes,
+Gym Challenge,29,Sabrina's Gengar,1st,EN,BGS,9,933.10,,,,no (BGS),non-holo
+Pokemon VS (JP),43/141,Pryce's Sneasel,1st,JP,PSA,10,857.89,,,,yes,Japanese VS 2001; needs JP data
+Neo Discovery,13,Umbreon,1st,EN,PSA,7,799.06,,,,yes,PSA 7 not modelled (model covers 8-10)
+Pokemon VS (JP),90/141,Karen's Tyranitar,1st,JP,CGC,10,749.99,,,,no (CGC),
+Gym Challenge,8,Giovanni's Persian,1st,EN,PSA,9,720.13,,,,yes,
+Team Rocket,8,Dark Gyarados,1st,EN,PSA,9,585.18,,,,yes,
+Team Rocket,11,Dark Magneton,1st,EN,PSA,9,511.03,,,,yes,
+Fossil,3,Ditto,1st,EN,PSA,9,482.11,,,,yes,
+Team Rocket,12,Dark Slowbro,1st,EN,PSA,9,432.62,,,,yes,
+Fossil,6,Haunter,1st,EN,PSA,9,424.97,,,,yes,
+Team Rocket,1,Dark Alakazam,1st,EN,PSA,9,411.72,,,,yes,
+Team Rocket,10,Dark Machamp,1st,EN,PSA,9,357.06,,,,yes,
+Team Rocket,6,Dark Dugtrio,1st,EN,PSA,9,328.73,,,,yes,
+Neo Genesis,10,Meganium,1st,EN,CGC,9,291.29,,,,no (CGC),
+Gym Heroes,5,Erika's Vileplume,1st,EN,PSA,9,274.65,,,,yes,
+Team Rocket,9,Dark Hypno,1st,EN,PSA,9,250.92,,,,yes,
+Team Rocket,13,Dark Vileplume,1st,EN,PSA,9,247.44,,,,yes,
+Team Rocket,2,Dark Arbok,1st,EN,PSA,9,242.43,,,,yes,
+Neo Genesis (JP),249,Lugia,unl,JP,RAW,,213.37,,,,no (raw),
+Team Rocket,7,Dark Golbat,1st,EN,PSA,9,209.07,,,,yes,
+Team Rocket,14,Dark Weezing,1st,EN,PSA,9,202.58,,,,yes,
+Neo Genesis,17,Typhlosion,unl,EN,RAW,,201.63,,,,no (raw),
+Neo Destiny,10,Dark Typhlosion,unl,EN,RAW,,184.46,,,,no (raw),
+WotC Black Star Promos,17,Dark Persian,unl,EN,PSA,7,158.88,,,,yes,PSA 7 not modelled
+Neo Genesis,5,Feraligatr,unl,EN,RAW,,150.13,,,,no (raw),
+Misc (JP),,Tohoku Box,,JP,SEALED,,155.00,,,,no (modern sealed),
+Misc (JP),,Hiroshima Box,,JP,SEALED,,153.35,,,,no (modern sealed),
+Misc (JP),,Fukuoka Box,,JP,SEALED,,149.43,,,,no (modern sealed),
+Celebrations Classic Collection,2/102,Blastoise,,EN,PSA,10,121.63,,,,no (modern),
+EX Dragon Frontiers,12/101,Typhlosion delta,rev,EN,RAW,,94.99,,,,no (raw),
+Pokemon 151 (JP),176/165,Poliwhirl,,JP,PSA,10,77.98,,,,no (modern),

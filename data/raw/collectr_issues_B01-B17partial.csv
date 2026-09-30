@@ -1,0 +1,5 @@
+batch_id,set,card_name,card_number,edition,variant,issue_type,detail,url_if_any
+B01,Base Set,Machamp,8/102,1st,holo,AMBIGUOUS_MATCH,"Not listed in Collectr ""Base Set (Unlimited)"" or ""Base Set (1st Edition & Shadowless)"". Search shows two 1st Edition Holofoil products under set ""Deck Exclusives"" (ID 42425 ""Machamp"" 008/102 and ID 107004 ""Machamp (Base Set Shadowless)"" 008/102); no capture",https://app.getcollectr.com/explore/product/42425
+B01,Base Set,Machamp,8/102,unlimited,holo,NOT_FOUND,"No Machamp 8/102 product in Collectr ""Base Set (Unlimited)""; no capture",
+B01,Base Set,Machamp,8/102,shadowless,holo,NOT_FOUND,"No Machamp 8/102 product in Collectr ""Base Set (1st Edition & Shadowless)""; no capture",
+B17,Neo Revelation,Crobat,4/64,,,CAPTCHA_OR_BLOCK,"RUN STOPPED FOR TECHNICAL REASONS - WILL RESUME LATER. From this card on, all Collectr data requests failed and the site switched to its ""technical difficulties"" / service-unavailable page. Not yet captured: B17 cards 4/64-10/64 and batches B18-B40. Resume point: B17 Neo Revelation 4/64 Crobat.",https://app.getcollectr.com/explore/product/84482
