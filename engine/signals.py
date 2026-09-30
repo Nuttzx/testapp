@@ -75,7 +75,7 @@ def opportunities(V, today):
             out.append({**base, "type": "CHEAP RECENT SALE", "strength": 1 - r.last_sale / r.fair_value,
                         "why": f"Sold at {r.last_sale:,.0f} on {r.last_sale_date:%Y-%m-%d}, {1 - r.last_sale / r.fair_value:.0%} "
                                f"below fair value {r.fair_value:,.0f}. Copies are clearing cheap: target the next one."})
-        if r.seg_mom_3m >= np.exp(MOMENTUM) - 1 and (age is None or age >= STALE_DAYS):
+        if r.seg_mom_3m >= np.exp(MOMENTUM) - 1 and age is not None and age >= STALE_DAYS:
             out.append({**base, "type": "STALE IN A RISING SEGMENT", "strength": r.seg_mom_3m,
                         "why": f"Its segment is up {r.seg_mom_3m:.0%} in 3 months, but this card-grade last sold "
                                f"{'never' if age is None else f'{age} days ago'}. Sellers may still price off old comps."})

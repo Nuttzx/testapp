@@ -79,9 +79,20 @@ def clean(s):
     q = s["listing_title"].fillna("").str.contains(QUALIFIER)
     s.loc[q & s.status.eq("used"), "status"] = "excluded:title_qualifier"
 
-    # 3. duplicate listings (same item id + grade), keep first
-    d = s["item"].notna() & s.duplicated(["item", "grade"], keep="first")
-    s.loc[d & s.status.eq("used"), "status"] = "excluded:duplicate_item"
+    # 2b. title states the other edition
+    tl = s["listing_title"].fillna("").str.lower()
+    says_1st = tl.str.contains(r"1st|1\. ?edition|first edition|1 ?ed\b", regex=True)
+    says_unl = tl.str.contains(r"unlimited|\bunl\b", regex=True)
+    s.loc[s.status.eq("used") & s.edition.eq("unl") & says_1st & ~says_unl, "status"] = "excluded:title_says_other_edition"
+    s.loc[s.status.eq("used") & s.edition.eq("1st") & says_unl & ~says_1st, "status"] = "excluded:title_says_other_edition"
+
+    # 3. same listing recorded under two editions -> edition unknown, exclude both;
+    #    same listing twice under the same edition -> keep first
+    it = s[s["item"].notna() & s.status.eq("used")]
+    conflict = it.groupby(["item", "grade"]).edition.transform("nunique") > 1
+    s.loc[it.index[conflict], "status"] = "excluded:edition_conflict_same_listing"
+    d = s["item"].notna() & s.status.eq("used") & s[s.status.eq("used")].duplicated(["item", "grade"], keep="first").reindex(s.index, fill_value=False)
+    s.loc[d, "status"] = "excluded:duplicate_item"
 
     # 4. cross-source duplicates: same card+grade, date within 2 days, price within 1%
     s = s.sort_values(["card_id", "grade", "date"])
