@@ -3,31 +3,31 @@ Index,set,card_number,card_name,edition,lang,grader,grade,collectr_value_usd,cos
 1,Neo Destiny,106,Shining Celebi,1st,EN,PSA,9.0,3148.76,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
 2,e-Card Base Expansion Pack,127/128,Tyranitar,1st,JP,PSA,10.0,3134.21,,,,yes,Japanese e-series; needs JP data,NO DATA YET,set not captured yet,,,,,,,
 3,Neo Revelation,7,Ho-oh,1st,EN,CGC,10.0,2749.0,2200.0,EUR,,no (CGC),outside PSA-only scope; tracked vs PSA 10/9 values,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
-4,Team Rocket,4,Dark Charizard,1st,EN,PSA,9.0,2703.63,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (2,947) is +7% vs fair value; cost unknown, flip rule not checked",2750.0578729913263,2209.4079760315412,3753.085402012987,2420.0509282323674,2900.0,2026-09-25,True
-5,Team Rocket,3,Dark Blastoise,1st,EN,PSA,9.0,1410.59,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",1445.0903397426814,1160.991611874954,1972.1575723709711,1271.6794989735597,1425.0,2026-09-28,True
+4,Team Rocket,4,Dark Charizard,1st,EN,PSA,9.0,2703.63,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",2906.7100090326853,2305.8388660285377,4129.654232430791,2557.904807948763,2900.0,2026-09-25,True
+5,Team Rocket,3,Dark Blastoise,1st,EN,PSA,9.0,1410.59,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",1501.40460793793,1191.03628771338,2133.092697411992,1321.2360549853784,1425.0,2026-09-28,True
 6,Neo Revelation (JP),229,Houndoom,unl,JP,CGC,10.0,999.99,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
-7,Team Rocket,83,Dark Raichu,1st,EN,PSA,9.0,983.86,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",912.6240993234194,733.2060113958636,1245.4851289985131,803.109207404609,920.0,2026-09-15,True
+7,Team Rocket,83,Dark Raichu,1st,EN,PSA,9.0,983.86,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",951.4925677937827,754.801317206847,1351.815384921617,837.3134596585287,920.0,2026-09-15,True
 8,Gym Challenge,29,Sabrina's Gengar,1st,EN,BGS,9.0,933.1,,,,no (BGS),non-holo,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 9,Pokemon VS (JP),43/141,Pryce's Sneasel,1st,JP,PSA,10.0,857.89,,,,yes,Japanese VS 2001; needs JP data,NO DATA YET,set not captured yet,,,,,,,
 10,Neo Discovery,13,Umbreon,1st,EN,PSA,7.0,799.06,,,,yes,PSA 7 not modelled (model covers 8-10),NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 11,Pokemon VS (JP),90/141,Karen's Tyranitar,1st,JP,CGC,10.0,749.99,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 12,Gym Challenge,8,Giovanni's Persian,1st,EN,PSA,9.0,720.13,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
-13,Team Rocket,8,Dark Gyarados,1st,EN,PSA,9.0,585.18,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",540.2083230370124,434.00562197563687,737.2382927457481,475.3833242725709,561.0,2026-09-21,True
-14,Team Rocket,11,Dark Magneton,1st,EN,PSA,9.0,511.03,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",500.1643978249465,401.8341652859224,682.5891624024543,440.1446700859529,425.0,2026-09-21,True
+13,Team Rocket,8,Dark Gyarados,1st,EN,PSA,9.0,585.18,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",570.4512318384209,452.52832840542766,810.4579874278071,501.9970840178104,561.0,2026-09-21,True
+14,Team Rocket,11,Dark Magneton,1st,EN,PSA,9.0,511.03,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",531.6246541113486,421.7279280628576,755.2958486031067,467.8296956179868,425.0,2026-09-21,True
 15,Fossil,3,Ditto,1st,EN,PSA,9.0,482.11,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
-16,Team Rocket,12,Dark Slowbro,1st,EN,PSA,9.0,432.62,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",383.2515117698715,307.90586454438994,523.0346852876762,337.26133035748694,500.0,2026-09-28,True
+16,Team Rocket,12,Dark Slowbro,1st,EN,PSA,9.0,432.62,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",403.2515096522895,319.8919055741534,572.9120890610858,354.86132849401474,500.0,2026-09-28,True
 17,Fossil,6,Haunter,1st,EN,PSA,9.0,424.97,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
-18,Team Rocket,1,Dark Alakazam,1st,EN,PSA,9.0,411.72,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",460.5323170719259,369.9935861539628,628.5020883861648,405.2684390232948,405.0,2026-09-21,True
-19,Team Rocket,10,Dark Machamp,1st,EN,PSA,9.0,357.06,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (385) is +5% vs fair value; cost unknown, flip rule not checked",365.3311520384215,293.5085727226898,498.57823978248786,321.4914137938109,275.0,2026-09-21,True
-20,Team Rocket,6,Dark Dugtrio,1st,EN,PSA,9.0,328.73,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (325) is +12% vs fair value; cost unknown, flip rule not checked",290.67628863354315,233.53054379602224,396.69453733903515,255.79513399751798,285.0,2026-09-28,True
+18,Team Rocket,1,Dark Alakazam,1st,EN,PSA,9.0,411.72,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",486.1304403505208,385.63821634647036,690.6607897824176,427.79478750845834,405.0,2026-09-21,True
+19,Team Rocket,10,Dark Machamp,1st,EN,PSA,9.0,357.06,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",382.2403689655241,303.2241593371422,543.0609013623945,336.3715246896612,275.0,2026-09-21,True
+20,Team Rocket,6,Dark Dugtrio,1st,EN,PSA,9.0,328.73,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",310.9240971277272,246.6502902986642,441.73963335803916,273.6132054723999,285.0,2026-09-28,True
 21,Neo Genesis,10,Meganium,1st,EN,CGC,9.0,291.29,,,,no (CGC),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 22,Gym Heroes,5,Erika's Vileplume,1st,EN,PSA,9.0,274.65,,,,yes,,NO DATA YET,set not captured yet,,,,,,,
-23,Team Rocket,9,Dark Hypno,1st,EN,PSA,9.0,250.92,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",261.6898928512024,210.2427524128361,357.1359447959112,230.2871057090581,243.5,2026-09-25,True
-24,Team Rocket,13,Dark Vileplume,1st,EN,PSA,9.0,247.44,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",211.42285473945313,169.85800414032926,288.53502959610523,186.05211217071874,305.0,2026-09-28,True
-25,Team Rocket,2,Dark Arbok,1st,EN,PSA,9.0,242.43,,,,yes,,SELL CANDIDATE,"Median of last 5 sales (210) is +9% vs fair value; cost unknown, flip rule not checked",192.59295395620643,154.72998324048726,262.8373064881599,169.48179948146165,210.0,2026-09-26,True
+23,Team Rocket,9,Dark Hypno,1st,EN,PSA,9.0,250.92,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",272.6626503537661,216.29819780656138,387.38039383362695,239.94313231131414,243.5,2026-09-25,True
+24,Team Rocket,13,Dark Vileplume,1st,EN,PSA,9.0,247.44,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",222.79696194430932,176.74067674031002,316.53464363726727,196.0613265109922,305.0,2026-09-28,True
+25,Team Rocket,2,Dark Arbok,1st,EN,PSA,9.0,242.43,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",201.90246796938806,160.16546416538722,286.84917958688254,177.6741718130615,210.0,2026-09-26,True
 26,Neo Genesis (JP),249,Lugia,unl,JP,RAW,,213.37,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
-27,Team Rocket,7,Dark Golbat,1st,EN,PSA,9.0,209.07,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",208.61663113266204,167.60347237928372,284.7052931542405,183.5826353967426,232.5,2026-09-25,True
-28,Team Rocket,14,Dark Weezing,1st,EN,PSA,9.0,202.58,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",175.9368879024354,141.34843023757475,240.10627999766055,154.82446135414315,179.99,2026-09-24,True
+27,Team Rocket,7,Dark Golbat,1st,EN,PSA,9.0,209.07,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",218.804823386995,173.5737876404614,310.86288696445433,192.5482445805556,232.5,2026-09-25,True
+28,Team Rocket,14,Dark Weezing,1st,EN,PSA,9.0,202.58,,,,yes,,HOLD,"Market in line with fair value; cost unknown, flip rule not checked",184.99749851757338,146.75506702570436,262.83175836878445,162.79779869546456,179.99,2026-09-24,True
 29,Neo Genesis,17,Typhlosion,unl,EN,RAW,,201.63,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 30,Neo Destiny,10,Dark Typhlosion,unl,EN,RAW,,184.46,,,,no (raw),,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
 31,WotC Black Star Promos,17,Dark Persian,unl,EN,PSA,7.0,158.88,,,,yes,PSA 7 not modelled,NOT MODELLED,outside PSA 8-10 scope or no data,,,,,,,
